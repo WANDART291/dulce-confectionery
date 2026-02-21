@@ -51,11 +51,20 @@ GRAPHENE = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+# THE VIP GUEST LIST - VERCEL IS NOW EXPLICITLY ALLOWED IN
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:5173",
+    "https://dulce-zone.vercel.app",
 ]
-CORS_ALLOW_CREDENTIALS = True
+
+# PREVENTS GRAPHQL MUTATIONS (LIKE CHECKOUT) FROM BEING BLOCKED
+CSRF_TRUSTED_ORIGINS = [
+    "https://dulce-zone.vercel.app",
+    "https://dulce-backend-api.onrender.com",
+]
 
 ROOT_URLCONF = 'core.urls'
 
