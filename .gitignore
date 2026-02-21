@@ -1,0 +1,10 @@
+# Security
+.env
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Database
+db.sqlite3

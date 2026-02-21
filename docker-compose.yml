@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: confectionery_db_container
+    environment:
+      - POSTGRES_DB=confectionery_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  web:
+    build: ./backend
+    container_name: confectionery_django_container
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    env_file:      # <-- ADD THIS LINE
+      - .env
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=confectionery_db
+      - DB_USER=postgres
+      - DB_PASS=password123
+      # This URL is a backup, but we primarily use the variables above now
+      - DATABASE_URL=postgres://postgres:password123@db:5432/confectionery_db
+
+volumes:
+  postgres_data:
