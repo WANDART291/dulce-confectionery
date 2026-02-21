@@ -103,8 +103,8 @@ dulce-confectionery/
 📸 Application Gallery
 
 Mobile-First Shopping Experience & Automated Email Receipts
+![alt text](image.png)  ![alt text](image-1.png) ![alt text](image-2.png)
 
-<div align="center"> <img src="screenshots/mobile-shop.png" alt="Mobile Shop View" width="30%" /> <img src="screenshots/mobile-course.png" alt="Mobile Course View" width="30%" /> <img src="screenshots/email-receipt.png" alt="Automated Email Receipt" width="30%" /> </div>
 🔐 Security & Best Practices
 
 Tokenized payments via Stripe (no card data stored)
