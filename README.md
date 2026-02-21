@@ -76,12 +76,15 @@ dulce-confectionery/
 │   └── vite.config.js
 └── README.md
 
-📸 Application Gallery
-Mobile-First Shopping Experience & Automated Email Receipts
+## 📸 Application Gallery
+
+**Mobile-First Shopping Experience & Automated Email Receipts**
 
 <div align="center">
-<img src="screenshots/mobile-shop.png" alt="Mobile Shop View" width="30%">
-<img src="screenshots/mobile-course.png" alt="Mobile Course View" width="30%">
-<img src="screenshots/email-receipt.png" alt="Automated Email Receipt" width="30%">
+  <img src="screenshots/mobile-shop.png" alt="Mobile Shop View" width="30%">
+  <img src="screenshots/mobile-course.png" alt="Mobile Course View" width="30%">
+  <img src="screenshots/email-receipt.png" alt="Automated Email Receipt" width="30%">
 </div>
+
+---
 
