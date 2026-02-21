@@ -1,4 +1,4 @@
-# 🍰 Dulce Zone Confectionery
+# 🍰 Dulce Zone Confectionery 
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
@@ -7,110 +7,81 @@
 ![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-A **premium full-stack e-commerce and course-booking web application** built for a high-end confectionery brand.  
-The platform uses a **decoupled architecture** with a modern React frontend and a powerful Django + GraphQL backend, featuring **real-time inventory control** and **secure, bank-grade payments**.
-
----
+A premium, full-stack e-commerce and course-booking web application built for a high-end confectionery brand. This project features a decoupled architecture with a dynamic React frontend and a robust Django/GraphQL backend, complete with real-time inventory management and bank-grade payment processing.
 
 ## ✨ Key Features
 
-- **Mobile-First Responsive UI**  
-  Sleek React interface optimized for both mobile and desktop users.
-
-- **GraphQL API**  
-  Efficient data fetching for products, courses, bookings, and checkout workflows.
-
-- **Secure Payment Gateway**  
-  Stripe integration with tokenized credit-card payments.
-
-- **Real-Time Inventory Management**  
-  PostgreSQL ensures accurate stock levels and prevents course overbooking.
-
-- **Automated SMTP Email System**  
-  Sends branded HTML receipts to customers and instant sales alerts to the business owner.
-
-- **Secure Merchant Portal**  
-  Django Admin customized for non-technical owners to manage products, pricing, orders, and courses.
-
----
+* **Mobile-First Responsive UI:** Sleek, modern frontend built with React, ensuring a flawless shopping experience across all desktop and mobile devices.
+* **GraphQL API:** Highly efficient data fetching to seamlessly deliver product catalogs, course schedules, and handle complex checkout mutations.
+* **Secure Payment Gateway:** Full integration with the Stripe API for secure, tokenized credit card processing.
+* **Real-Time Inventory Management:** PostgreSQL database strictly controls stock numbers and course seating to prevent overbooking.
+* **Automated SMTP Email System:** Instantly generates and delivers branded, custom HTML receipts to customers while simultaneously triggering VIP alerts to the business owner upon successful transactions.
+* **Secure Merchant Portal:** Leveraging Django's native admin panel to provide non-technical business owners with a custom dashboard to manage pricing, inventory, and order fulfillment.
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- React.js (Vite)
-- Apollo Client (GraphQL state management)
-- Modern CSS (Flexbox & Grid)
+**Frontend:**
+* React.js (Vite)
+* Apollo Client (GraphQL State Management)
+* Modern CSS Flexbox & Grid
 
-### Backend
-- Python / Django
-- Graphene-Django (GraphQL)
-- PostgreSQL
-- Django Core Mail (SMTP automation)
-- Stripe Python SDK
+**Backend:**
+* Python / Django
+* Graphene-Django (GraphQL Implementation)
+* PostgreSQL (Relational Database)
+* Django Core Mail (SMTP Email Automation)
+* Stripe Python SDK
 
-### DevOps
-- Docker & Docker Compose
-- Git version control
-
----
+**DevOps:**
+* Docker & Docker Compose
+* Git Version Control
 
 ## 🚀 Local Setup & Installation
 
-You will need **two terminal windows** running at the same time.
+To run this application on your local machine, you will need two terminal windows running concurrently.
 
----
-
-### 1️⃣ Start the Backend (API & Database)
-
+### 1. Start the Backend (API & Database)
+Navigate to the backend directory and spin up the Docker containers:
 ```bash
 cd backend
 docker-compose up
 
-GraphQL API: http://localhost:8000/graphql/
+The GraphQL endpoint will be available at http://localhost:8000/graphql/
+The Merchant Portal is accessible at http://localhost:8000/admin/
 
-Merchant Admin Portal: http://localhost:8000/admin/
+2. Start the Frontend (User Interface)
+Open a new terminal, navigate to the frontend directory, install dependencies, and start the development server:
 
-2️⃣ Start the Frontend (User Interface)
 cd frontend
 npm install
 npm run dev
 
-Application URL: http://localhost:5173
+The application will be live at http://localhost:5173
 
 📂 Project Architecture
+
 dulce-confectionery/
-├── backend/                  # Django & PostgreSQL environment
-│   ├── business/             # Core app (models, admin, schema, templates)
-│   ├── core/                 # Settings & URL configuration
-│   ├── Dockerfile
-│   ├── docker-compose.yml    # API + database orchestration
+├── backend/                  # Django & PostgreSQL Environment
+│   ├── business/             # Core app: Models, Admin, schema.py, HTML templates
+│   ├── core/                 # Django settings, URL routing
+│   ├── Dockerfile            
+│   ├── docker-compose.yml    # Database and web server orchestration
 │   └── manage.py
-│
-├── frontend/                 # React application
-│   ├── src/
-│   │   ├── components/       # Reusable UI components
-│   │   ├── pages/            # Views (Shop, Academy, Checkout)
-│   │   └── App.jsx           # Apollo provider & routing
+├── frontend/                 # React UI Environment
+│   ├── src/                  
+│   │   ├── components/       # Reusable UI elements
+│   │   ├── pages/            # View views (Shop, Academy, Checkout)
+│   │   └── App.jsx           # Apollo Provider & Routing
 │   ├── package.json
 │   └── vite.config.js
-│
-├── screenshots/              # README images (important!)
-│   ├── mobile-shop.png
-│   ├── mobile-course.png
-│   └── email-receipt.png
-│
 └── README.md
+
 📸 Application Gallery
-
 Mobile-First Shopping Experience & Automated Email Receipts
-![alt text](image.png)  ![alt text](image-1.png) ![alt text](image-2.png)
 
-🔐 Security & Best Practices
+<div align="center">
+<img src="screenshots/mobile-shop.png" alt="Mobile Shop View" width="30%">
+<img src="screenshots/mobile-course.png" alt="Mobile Course View" width="30%">
+<img src="screenshots/email-receipt.png" alt="Automated Email Receipt" width="30%">
+</div>
 
-Tokenized payments via Stripe (no card data stored)
-
-Environment variables for secrets
-
-Database-level inventory enforcement
-
-Django admin access protected by authentication
