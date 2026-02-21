@@ -7,81 +7,39 @@
 ![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-A premium, full-stack e-commerce and course-booking web application built for a high-end confectionery brand. This project features a decoupled architecture with a dynamic React frontend and a robust Django/GraphQL backend, complete with real-time inventory management and bank-grade payment processing.
+A premium, full-stack e-commerce and course-booking web application built for a high-end confectionery brand. This project features a decoupled architecture with a dynamic React frontend and a robust Django/GraphQL backend.
 
 ## ✨ Key Features
 
-* **Mobile-First Responsive UI:** Sleek, modern frontend built with React, ensuring a flawless shopping experience across all desktop and mobile devices.
-* **GraphQL API:** Highly efficient data fetching to seamlessly deliver product catalogs, course schedules, and handle complex checkout mutations.
-* **Secure Payment Gateway:** Full integration with the Stripe API for secure, tokenized credit card processing.
-* **Real-Time Inventory Management:** PostgreSQL database strictly controls stock numbers and course seating to prevent overbooking.
-* **Automated SMTP Email System:** Instantly generates and delivers branded, custom HTML receipts to customers while simultaneously triggering VIP alerts to the business owner upon successful transactions.
-* **Secure Merchant Portal:** Leveraging Django's native admin panel to provide non-technical business owners with a custom dashboard to manage pricing, inventory, and order fulfillment.
-
-## 🛠️ Tech Stack
-
-**Frontend:**
-* React.js (Vite)
-* Apollo Client (GraphQL State Management)
-* Modern CSS Flexbox & Grid
-
-**Backend:**
-* Python / Django
-* Graphene-Django (GraphQL Implementation)
-* PostgreSQL (Relational Database)
-* Django Core Mail (SMTP Email Automation)
-* Stripe Python SDK
-
-**DevOps:**
-* Docker & Docker Compose
-* Git Version Control
+* **Mobile-First Responsive UI:** Sleek, modern frontend built with React.
+* **GraphQL API:** Highly efficient data fetching.
+* **Secure Payment Gateway:** Full integration with the Stripe API.
+* **Automated SMTP Email System:** Instantly generates and delivers custom HTML receipts.
 
 ## 🚀 Local Setup & Installation
 
-To run this application on your local machine, you will need two terminal windows running concurrently.
-
-### 1. Start the Backend (API & Database)
+**1. Start the Backend (API & Database)**
 Navigate to the backend directory and spin up the Docker containers:
-```bash
-cd backend
-docker-compose up
+`cd backend`
+`docker-compose up`
 
-The GraphQL endpoint will be available at http://localhost:8000/graphql/
-The Merchant Portal is accessible at http://localhost:8000/admin/
-
-2. Start the Frontend (User Interface)
+**2. Start the Frontend (User Interface)**
 Open a new terminal, navigate to the frontend directory, install dependencies, and start the development server:
+`cd frontend`
+`npm install`
+`npm run dev`
 
-cd frontend
-npm install
-npm run dev
+---
 
-The application will be live at http://localhost:5173
+## 📸 Application Gallery
 
-📂 Project Architecture
+**Mobile Shop View**
+![Mobile Shop](screenshots/mobile-shop.png)
 
-dulce-confectionery/
-├── backend/                  # Django & PostgreSQL Environment
-│   ├── business/             # Core app: Models, Admin, schema.py, HTML templates
-│   ├── core/                 # Django settings, URL routing
-│   ├── Dockerfile            
-│   ├── docker-compose.yml    # Database and web server orchestration
-│   └── manage.py
-├── frontend/                 # React UI Environment
-│   ├── src/                  
-│   │   ├── components/       # Reusable UI elements
-│   │   ├── pages/            # View views (Shop, Academy, Checkout)
-│   │   └── App.jsx           # Apollo Provider & Routing
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
+**Mobile Course View**
+![Mobile Course](screenshots/mobile-course.png)
 
-📸 Application Gallery
-Mobile-First Shopping Experience & Automated Email Receipts
+**Automated Email Receipt**
+![Email Receipt](screenshots/email-receipt.png)
 
-<div align="center">
-<img src="screenshots/mobile-shop.png" alt="Mobile Shop View" width="30%">
-<img src="screenshots/mobile-course.png" alt="Mobile Course View" width="30%">
-<img src="screenshots/email-receipt.png" alt="Automated Email Receipt" width="30%">
-</div>
 
