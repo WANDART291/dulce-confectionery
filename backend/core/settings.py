@@ -50,7 +50,8 @@ GRAPHENE = {
     "SCHEMA": "business.schema.schema"
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+# THE SECURITY FIX: This forces Django to actually look at your VIP list below
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
 # THE VIP GUEST LIST - VERCEL IS NOW EXPLICITLY ALLOWED IN
@@ -85,9 +86,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+# THE DATABASE FIX: Pointing the fallback directly to your local PostgreSQL database
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+        default=os.environ.get('DATABASE_URL', 'postgresql://postgres:password123@localhost:5432/confectionery_db')
     )
 }
 
