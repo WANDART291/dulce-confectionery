@@ -114,8 +114,8 @@ class CreateOrder(graphene.Mutation):
             send_mail(
                 customer_subject,
                 plain_message,
-                'wandilekhanyile63@gmail.com', 
-                [email], # Sent to the customer's email
+                'onboarding@resend.dev', 
+                [email], 
                 html_message=html_message,
                 fail_silently=False
             )
@@ -124,8 +124,8 @@ class CreateOrder(graphene.Mutation):
             send_mail(
                 owner_subject,
                 owner_message,
-                'wandilekhanyile63@gmail.com', # Sent from the app
-                ['wandilekhanyile63@gmail.com'], # Sent directly to the owner!
+                'onboarding@resend.dev', 
+                ['wandilekhanyile63@gmail.com'], 
                 fail_silently=False
             )
             print("BOTH EMAILS SENT SUCCESSFULLY!")

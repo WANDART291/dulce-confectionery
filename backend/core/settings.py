@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'business',
+    'anymail',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -111,20 +112,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom User Model
 AUTH_USER_MODEL = 'business.User'
 
-# --- EMAIL CONFIGURATION (LIVE) ---
-# Now using SMTP to send real emails to your inbox!
-# --- EMAIL CONFIGURATION ---
-# Temporarily printing emails to the console to bypass the Render timeout crash
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# --- EMAIL CONFIGURATION (RESEND API) ---
+# Now using standard web traffic (Port 443) to slice through the Render firewall!
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 
-# Swap to Port 465 and SSL to bypass the cloud firewall
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_USE_TLS = False 
+ANYMAIL = {
+    "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
+}
 
-EMAIL_HOST_USER = 'wandilekhanyile63@gmail.com' 
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
-# Give Google exactly 10 seconds to respond before saving the server from a crash
-EMAIL_TIMEOUT = 10
+# Resend requires you to send FROM their onboarding address 
+# until you buy a custom domain (like dulcezone.com)
+DEFAULT_FROM_EMAIL = "onboarding@resend.dev"
