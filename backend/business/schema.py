@@ -60,6 +60,7 @@ class CreateOrder(graphene.Mutation):
         except stripe.error.CardError as e:
             return CreateOrder(ok=False, error_message=f"Payment declined: {e.user_message}")
         except Exception as e:
+            print(f"❌ EXACT PAYMENT ERROR: {str(e)}")
             return CreateOrder(ok=False, error_message="Payment processing failed. Please try again.")
 
         if product_ids:
