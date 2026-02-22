@@ -113,12 +113,18 @@ AUTH_USER_MODEL = 'business.User'
 
 # --- EMAIL CONFIGURATION (LIVE) ---
 # Now using SMTP to send real emails to your inbox!
+# --- EMAIL CONFIGURATION ---
+# Temporarily printing emails to the console to bypass the Render timeout crash
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+
+# Swap to Port 465 and SSL to bypass the cloud firewall
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False 
+
 EMAIL_HOST_USER = 'wandilekhanyile63@gmail.com' 
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-# --- STRIPE CONFIGURATION ---
-STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+
+# Give Google exactly 10 seconds to respond before saving the server from a crash
+EMAIL_TIMEOUT = 10
