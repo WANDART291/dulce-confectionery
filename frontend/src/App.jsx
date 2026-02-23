@@ -8,14 +8,14 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 const stripePromise = loadStripe('pk_test_51T2UaP2fn16GFiupzTUIFKgMednFZi9jsUpTgZs7ih52q6VT1niOi1o9hGmjXvBLHEikJr9wNcjHua48PiMAC23v00aaZ1NgL0');
 
 // --- 1. DATA QUERIES & MUTATIONS ---
+// UPGRADED: Added imageUrl to allProducts!
 const GET_DATA = gql`
   query GetData {
-    allProducts { id name price stockQuantity }
+    allProducts { id name price stockQuantity imageUrl }
     allCourses { id title level dateTime price imageUrl seatsAvailable }
   }
 `;
 
-// NEW: Added $paymentMethodId to the mutation to send it to Django
 const CREATE_ORDER = gql`
   mutation CreateOrder($fullName: String!, $email: String!, $totalAmount: Decimal!, $itemsSummary: String!, $paymentMethodId: String!, $productIds: [ID], $courseIds: [ID]) {
     createOrder(fullName: $fullName, email: $email, totalAmount: $totalAmount, itemsSummary: $itemsSummary, paymentMethodId: $paymentMethodId, productIds: $productIds, courseIds: $courseIds) {
@@ -41,22 +41,7 @@ const formatDate = (isoString) => {
 const PLACEHOLDER = "https://images.unsplash.com/photo-1626803775151-61d756612f97?w=800";
 
 const getCourseImage = (title, dbImageUrl) => {
-  const lowerTitle = title.toLowerCase();
-  if (lowerTitle.includes("wedding")) return "https://images.unsplash.com/photo-1560180474-e8563fd75bab?w=800";
-  if (lowerTitle.includes("macaron")) return "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800";
-  if (lowerTitle.includes("sourdough")) return "https://images.unsplash.com/photo-1585478259715-876a6a81fc08?w=800";
-  if (lowerTitle.includes("vegan")) return "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800";
   return dbImageUrl || PLACEHOLDER;
-};
-
-const getProductImage = (name) => {
-  const lowerName = name.toLowerCase();
-  if (lowerName.includes("red velvet")) return "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=800";
-  if (lowerName.includes("chocolate")) return "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800";
-  if (lowerName.includes("lemon")) return "https://images.unsplash.com/photo-1519340333755-56e9c1d04579?w=800";
-  if (lowerName.includes("vanilla")) return "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800";
-  if (lowerName.includes("carrot")) return "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800";
-  return PLACEHOLDER;
 };
 
 // --- STRIPE CARD STYLING ---
@@ -78,11 +63,9 @@ function DulceApp() {
   const { loading, error, data } = useQuery(GET_DATA);
   const [createOrder] = useMutation(CREATE_ORDER, { refetchQueries: [{ query: GET_DATA }] });
   
-  // STRIPE HOOKS
   const stripe = useStripe();
   const elements = useElements();
   
-  // --- STATES ---
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [toast, setToast] = useState(null);
@@ -100,7 +83,6 @@ function DulceApp() {
   const bookCourse = (course) => { setSelectedCourse(course); setView('course-checkout'); window.scrollTo(0, 0); };
   const cartTotal = cart.reduce((total, item) => total + parseFloat(item.price), 0);
 
-  // --- CHECKOUT LOGIC FOR CART (CAKES) ---
   const handleCartCheckout = async (e) => {
     e.preventDefault();
     if (!stripe || !elements || cart.length === 0) return;
@@ -129,7 +111,7 @@ function DulceApp() {
                 email: formData.email, 
                 totalAmount: String(cartTotal), 
                 itemsSummary: summaryString, 
-                paymentMethodId: paymentMethod.id, // NEW: Sending the secure token
+                paymentMethodId: paymentMethod.id,
                 productIds: productIds 
             }
         });
@@ -147,7 +129,6 @@ function DulceApp() {
     setIsProcessing(false);
   };
 
-  // --- CHECKOUT LOGIC FOR ACADEMY (COURSES) ---
   const handleCourseBooking = async (e) => {
     e.preventDefault();
     if (!stripe || !elements || !selectedCourse) return;
@@ -176,7 +157,7 @@ function DulceApp() {
                 email: formData.email, 
                 totalAmount: String(selectedCourse.price), 
                 itemsSummary: summaryString, 
-                paymentMethodId: paymentMethod.id, // NEW: Sending the secure token
+                paymentMethodId: paymentMethod.id, 
                 courseIds: courseIds 
             }
         });
@@ -263,12 +244,9 @@ function DulceApp() {
         .form-group { margin-bottom: 20px; text-align: left; }
         .form-label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--p-dark); }
         .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; box-sizing: border-box; }
-        
-        /* NEW STRIPE INPUT STYLING */
         .StripeElement { padding: 12px; border: 1px solid #ddd; border-radius: 5px; background: white; box-sizing: border-box; }
         .StripeElement--focus { border-color: var(--a-gold); box-shadow: 0 0 0 1px var(--a-gold); }
         .StripeElement--invalid { border-color: #fa755a; }
-        
         .summary-box { background: var(--bg-l); padding: 20px; border-radius: 8px; margin-bottom: 30px; }
         .back-link { display: block; text-align: center; margin-top: 20px; color: #888; cursor: pointer; text-decoration: underline; }
         .order-receipt { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-top: 30px; border-top: 5px solid var(--a-gold); }
@@ -331,7 +309,8 @@ function DulceApp() {
                   <div className={`stock-badge ${cake.stockQuantity <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {cake.stockQuantity > 0 ? `${cake.stockQuantity} in stock` : 'SOLD OUT'}
                   </div>
-                  <img src={getProductImage(cake.name)} className="card-img" alt={cake.name} />
+                  {/* UPDATED: Pulling actual image from the backend */}
+                  <img src={cake.imageUrl || PLACEHOLDER} className="card-img" alt={cake.name} />
                   <div className="card-body">
                     <h3 style={{fontFamily: 'Playfair Display', fontSize: '1.4rem'}}>{cake.name}</h3>
                     <div style={{fontSize: '1.4rem', color: '#d84378', fontWeight: 'bold', marginBottom: '10px'}}>R {parseFloat(cake.price).toFixed(2)}</div>
@@ -379,7 +358,8 @@ function DulceApp() {
                   <div className={`stock-badge ${cake.stockQuantity <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {cake.stockQuantity > 0 ? `${cake.stockQuantity} in stock` : 'SOLD OUT'}
                   </div>
-                  <img src={getProductImage(cake.name)} className="card-img" alt={cake.name} />
+                  {/* UPDATED: Pulling actual image from the backend */}
+                  <img src={cake.imageUrl || PLACEHOLDER} className="card-img" alt={cake.name} />
                   <div className="card-body">
                     <h3 style={{fontFamily: 'Playfair Display', fontSize: '1.4rem'}}>{cake.name}</h3>
                     <div style={{fontSize: '1.4rem', color: '#d84378', fontWeight: 'bold', marginBottom: '10px'}}>R {parseFloat(cake.price).toFixed(2)}</div>
@@ -436,7 +416,6 @@ function DulceApp() {
                 <div className="form-group"><label className="form-label">Full Name</label><input type="text" required className="form-input" placeholder="e.g. John Doe" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} /></div>
                 <div className="form-group"><label className="form-label">Email Address</label><input type="email" required className="form-input" placeholder="e.g. john@example.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} /></div>
                 
-                {/* NEW: STRIPE INPUT FIELD */}
                 <div className="form-group">
                   <label className="form-label">Credit Card Details</label>
                   <CardElement options={CARD_ELEMENT_OPTIONS} className="StripeElement" />
@@ -463,7 +442,6 @@ function DulceApp() {
                 <div className="form-group"><label className="form-label">Student Name</label><input type="text" required className="form-input" placeholder="e.g. Jane Doe" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} /></div>
                 <div className="form-group"><label className="form-label">Email Address</label><input type="email" required className="form-input" placeholder="e.g. jane@example.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} /></div>
                 
-                {/* NEW: STRIPE INPUT FIELD */}
                 <div className="form-group">
                   <label className="form-label">Credit Card Details</label>
                   <CardElement options={CARD_ELEMENT_OPTIONS} className="StripeElement" />
