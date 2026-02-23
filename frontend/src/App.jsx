@@ -8,7 +8,6 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 const stripePromise = loadStripe('pk_test_51T2UaP2fn16GFiupzTUIFKgMednFZi9jsUpTgZs7ih52q6VT1niOi1o9hGmjXvBLHEikJr9wNcjHua48PiMAC23v00aaZ1NgL0');
 
 // --- 1. DATA QUERIES & MUTATIONS ---
-// UPGRADED: Added imageUrl to allProducts!
 const GET_DATA = gql`
   query GetData {
     allProducts { id name price stockQuantity imageUrl }
@@ -40,7 +39,7 @@ const formatDate = (isoString) => {
 
 const PLACEHOLDER = "https://images.unsplash.com/photo-1626803775151-61d756612f97?w=800";
 
-const getCourseImage = (title, dbImageUrl) => {
+const getCourseImage = (dbImageUrl) => {
   return dbImageUrl || PLACEHOLDER;
 };
 
@@ -309,7 +308,7 @@ function DulceApp() {
                   <div className={`stock-badge ${cake.stockQuantity <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {cake.stockQuantity > 0 ? `${cake.stockQuantity} in stock` : 'SOLD OUT'}
                   </div>
-                  {/* UPDATED: Pulling actual image from the backend */}
+                  {/* UPDATED: Directly using imageUrl from the database */}
                   <img src={cake.imageUrl || PLACEHOLDER} className="card-img" alt={cake.name} />
                   <div className="card-body">
                     <h3 style={{fontFamily: 'Playfair Display', fontSize: '1.4rem'}}>{cake.name}</h3>
@@ -332,7 +331,8 @@ function DulceApp() {
                   <div className={`stock-badge ${course.seatsAvailable <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {course.seatsAvailable > 0 ? `${course.seatsAvailable} seats left` : 'FULL'}
                   </div>
-                  <img src={getCourseImage(course.title, course.imageUrl)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
+                  {/* UPDATED: Directly using imageUrl from the database */}
+                  <img src={getCourseImage(course.imageUrl)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
                   <div className="course-content">
                     <div className="course-meta"><span>{course.level}</span><span>{formatDate(course.dateTime)}</span></div>
                     <h3 className="course-title">{course.title}</h3>
@@ -358,7 +358,7 @@ function DulceApp() {
                   <div className={`stock-badge ${cake.stockQuantity <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {cake.stockQuantity > 0 ? `${cake.stockQuantity} in stock` : 'SOLD OUT'}
                   </div>
-                  {/* UPDATED: Pulling actual image from the backend */}
+                  {/* UPDATED: Directly using imageUrl from the database */}
                   <img src={cake.imageUrl || PLACEHOLDER} className="card-img" alt={cake.name} />
                   <div className="card-body">
                     <h3 style={{fontFamily: 'Playfair Display', fontSize: '1.4rem'}}>{cake.name}</h3>
@@ -382,7 +382,8 @@ function DulceApp() {
                   <div className={`stock-badge ${course.seatsAvailable <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {course.seatsAvailable > 0 ? `${course.seatsAvailable} seats left` : 'FULL'}
                   </div>
-                  <img src={getCourseImage(course.title, course.imageUrl)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
+                  {/* UPDATED: Directly using imageUrl from the database */}
+                  <img src={getCourseImage(course.imageUrl)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
                   <div className="course-content">
                     <div className="course-meta"><span>{course.level}</span><span>{formatDate(course.dateTime)}</span></div>
                     <h3 className="course-title">{course.title}</h3>
