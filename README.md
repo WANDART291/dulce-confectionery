@@ -1,4 +1,4 @@
-# 🍰 Dulce Zone Confectionery 
+# 🍰 Dulce Zone Confectionery | Full-Stack E-Commerce Architecture
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
@@ -7,40 +7,74 @@
 ![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-A premium, full-stack e-commerce and course-booking web application built for a high-end confectionery brand. This project features a decoupled architecture with a dynamic React frontend and a robust Django/GraphQL backend.
+**Live Deployment:** [dulce-zone.vercel.app](https://dulce-zone.vercel.app)
 
-## ✨ Key Features
+A premium, production-ready e-commerce and course-booking engine designed for a high-end confectionery brand. Engineered with a decoupled architecture, this platform leverages a highly responsive React frontend and a robust Django/GraphQL backend to deliver seamless transactional checkouts and automated inventory management. 
 
-* **Mobile-First Responsive UI:** Sleek, modern frontend built with React.
-* **GraphQL API:** Highly efficient data fetching.
-* **Secure Payment Gateway:** Full integration with the Stripe API.
-* **Automated SMTP Email System:** Instantly generates and delivers custom HTML receipts.
-
-## 🚀 Local Setup & Installation
-
-**1. Start the Backend (API & Database)**
-Navigate to the backend directory and spin up the Docker containers:
-`cd backend`
-`docker-compose up`
-
-**2. Start the Frontend (User Interface)**
-Open a new terminal, navigate to the frontend directory, install dependencies, and start the development server:
-`cd frontend`
-`npm install`
-`npm run dev`
+Designed and deployed in a rapid 50-hour development sprint to demonstrate high-velocity, full-stack execution.
 
 ---
 
-## 📸 Application Gallery
+## 📸 Application Interface
 
-**Mobile Shop View**
-![Mobile Shop](screenshots/mobile-shop.png)
+> *Note: UI designed with a mobile-first approach to capture optimal conversion rates.*
 
-**Mobile Course View**
-![Mobile Course](screenshots/mobile-course.png)
+| Mobile Storefront | Course Booking System | Automated Receipts |
+| :---: | :---: | :---: |
+| <img src="screenshots/mobile-shop.png" width="250" alt="Mobile Shop View"/> | <img src="screenshots/mobile-course.png" width="250" alt="Mobile Course View"/> | <img src="screenshots/email-receipt.png" width="250" alt="Email Receipt"/> |
 
-**Automated Email Receipt**
-![Email Receipt](screenshots/email-receipt.png)
+*(Replace the image paths above with the actual high-res screenshots of your application)*
+
+---
+
+## ⚙️ System Architecture & Tech Stack
+
+This project strictly separates the presentation layer from the business logic, ensuring scalability and secure data flow.
+
+### Frontend (Client Layer)
+* **Framework:** React.js
+* **State Management:** React Context API / Hooks
+* **API Integration:** Apollo GraphQL Client for optimized, over-fetching-proof queries.
+* **Hosting:** Vercel (Edge Network)
+
+### Backend (API & Database Layer)
+* **Framework:** Django & Python
+* **API Structure:** GraphQL (Graphene-Django)
+* **Database:** PostgreSQL (Relational integrity for orders and user data)
+* **Containerization:** Docker & Docker Compose
+* **Hosting:** Render Cloud Infrastructure
+
+---
+
+## ✨ Core Business Features
+
+* **Secure Payment Processing:** End-to-end integration with the Stripe API, utilizing webhooks to securely process payments and validate transactions before updating database inventory.
+* **GraphQL Data Fetching:** Implemented advanced GraphQL mutations and queries to drastically reduce payload sizes and improve mobile loading speeds.
+* **Automated SMTP Engine:** Custom Python email logic that instantly generates HTML-formatted receipts and booking confirmations upon successful Stripe webhooks.
+* **Infrastructure Monitoring:** Integrated automated uptime monitoring to ensure API availability and track container cold-starts.
+
+---
+
+## 🚀 Local Development Setup
+
+To run this architecture locally, ensure you have Docker and Node.js installed on your machine.
+
+**1. Clone the Repository**
+```bash
+git clone [https://github.com/WANDART291/dulce-zone.git](https://github.com/WANDART291/dulce-zone.git)
+cd dulce-zone
 
 
+cd backend
+# This builds the Django image and provisions the PostgreSQL database
+docker-compose up --build
+
+cd frontend
+npm install
+npm run dev
+
+👨‍💻 Engineering Contact
+Wandile Khanyile * Full-Stack Developer
+
+GitHub: @WANDART291
 
