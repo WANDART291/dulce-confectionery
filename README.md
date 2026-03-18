@@ -23,7 +23,7 @@ Designed and deployed in a rapid 50-hour development sprint to demonstrate high-
 https://dulce-zone.vercel.app
 
 ## 📸 Application Gallery
->>>>>>> 46f19ff7dbef3d7e7a58af6045ede0a1681bd942
+
 
 > *Note: UI designed with a mobile-first approach to capture optimal conversion rates.*
 
@@ -31,7 +31,7 @@ https://dulce-zone.vercel.app
 | :---: | :---: | :---: |
 | <img src="screenshots/mobile-shop.png" width="250" alt="Mobile Shop View"/> | <img src="screenshots/mobile-course.png" width="250" alt="Mobile Course View"/> | <img src="screenshots/email-receipt.png" width="250" alt="Email Receipt"/> |
 
-*(Replace the image paths above with the actual high-res screenshots of your application)*
+
 
 ---
 
