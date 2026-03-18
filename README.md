@@ -39,6 +39,9 @@ Open a new terminal, navigate to the frontend directory, install dependencies, a
 **Mobile Course View**
 ![Mobile Course](screenshots/mobile-course.png)
 
+## Live Demo
+[Check out the live project here](https://dulce-zone.vercel.app/)
+
 **Automated Email Receipt**
 ![Email Receipt](screenshots/email-receipt.png)
 
