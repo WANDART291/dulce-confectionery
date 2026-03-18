@@ -15,7 +15,15 @@ Designed and deployed in a rapid 50-hour development sprint to demonstrate high-
 
 ---
 
+
 ## 📸 Application Interface
+=======
+
+## Live Demo
+https://dulce-zone.vercel.app
+
+## 📸 Application Gallery
+>>>>>>> 46f19ff7dbef3d7e7a58af6045ede0a1681bd942
 
 > *Note: UI designed with a mobile-first approach to capture optimal conversion rates.*
 
