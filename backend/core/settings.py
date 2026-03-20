@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'business',
+    'anymail',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -111,18 +112,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Custom User Model
 AUTH_USER_MODEL = 'business.User'
 
-# --- EMAIL CONFIGURATION (GMAIL SMTP) ---
-# Bypassing Resend to use direct Gmail routing for the portfolio demo
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# --- EMAIL CONFIGURATION (RESEND API) ---
+# Now using standard web traffic (Port 443) to slice through the Render firewall!
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 
-# Your personal Gmail address
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'wandilekhanyile63@gmail.com')
+ANYMAIL = {
+    "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
+}
 
-# SECURITY WARNING: Never hardcode your actual email password here. 
-# You must use a 16-letter Google App Password pulled from your .env file or Render dashboard.
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') 
-
-DEFAULT_FROM_EMAIL = 'wandilekhanyile63@gmail.com'
+# Resend requires you to send FROM their onboarding address 
+# until you buy a custom domain (like dulcezone.com)
+DEFAULT_FROM_EMAIL = "onboarding@resend.dev"
