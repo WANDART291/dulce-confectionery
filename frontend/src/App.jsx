@@ -10,8 +10,8 @@ const stripePromise = loadStripe('pk_test_51T2UaP2fn16GFiupzTUIFKgMednFZi9jsUpTg
 // --- 1. DATA QUERIES & MUTATIONS ---
 const GET_DATA = gql`
   query GetData {
-    allProducts { id name price stockQuantity imageUrl }
-    allCourses { id title level dateTime price imageUrl seatsAvailable }
+    allProducts { id name price stockQuantity image_url }
+    allCourses { id title level dateTime price image_url seatsAvailable }
   }
 `;
 
@@ -308,8 +308,8 @@ function DulceApp() {
                   <div className={`stock-badge ${cake.stockQuantity <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {cake.stockQuantity > 0 ? `${cake.stockQuantity} in stock` : 'SOLD OUT'}
                   </div>
-                  {/* UPDATED: Directly using imageUrl from the database */}
-                  <img src={cake.imageUrl || PLACEHOLDER} className="card-img" alt={cake.name} />
+                  {/* UPDATED: Directly using image_url from the database */}
+                  <img src={cake.image_url || PLACEHOLDER} className="card-img" alt={cake.name} />
                   <div className="card-body">
                     <h3 style={{fontFamily: 'Playfair Display', fontSize: '1.4rem'}}>{cake.name}</h3>
                     <div style={{fontSize: '1.4rem', color: '#d84378', fontWeight: 'bold', marginBottom: '10px'}}>R {parseFloat(cake.price).toFixed(2)}</div>
@@ -331,8 +331,8 @@ function DulceApp() {
                   <div className={`stock-badge ${course.seatsAvailable <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {course.seatsAvailable > 0 ? `${course.seatsAvailable} seats left` : 'FULL'}
                   </div>
-                  {/* UPDATED: Directly using imageUrl from the database */}
-                  <img src={getCourseImage(course.imageUrl)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
+                  {/* UPDATED: Directly using image_url from the database */}
+                  <img src={getCourseImage(course.image_url)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
                   <div className="course-content">
                     <div className="course-meta"><span>{course.level}</span><span>{formatDate(course.dateTime)}</span></div>
                     <h3 className="course-title">{course.title}</h3>
@@ -358,8 +358,8 @@ function DulceApp() {
                   <div className={`stock-badge ${cake.stockQuantity <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {cake.stockQuantity > 0 ? `${cake.stockQuantity} in stock` : 'SOLD OUT'}
                   </div>
-                  {/* UPDATED: Directly using imageUrl from the database */}
-                  <img src={cake.imageUrl || PLACEHOLDER} className="card-img" alt={cake.name} />
+                  {/* UPDATED: Directly using image_url from the database */}
+                  <img src={cake.image_url || PLACEHOLDER} className="card-img" alt={cake.name} />
                   <div className="card-body">
                     <h3 style={{fontFamily: 'Playfair Display', fontSize: '1.4rem'}}>{cake.name}</h3>
                     <div style={{fontSize: '1.4rem', color: '#d84378', fontWeight: 'bold', marginBottom: '10px'}}>R {parseFloat(cake.price).toFixed(2)}</div>
@@ -382,8 +382,8 @@ function DulceApp() {
                   <div className={`stock-badge ${course.seatsAvailable <= 0 ? 'out-of-stock-badge' : ''}`}>
                     {course.seatsAvailable > 0 ? `${course.seatsAvailable} seats left` : 'FULL'}
                   </div>
-                  {/* UPDATED: Directly using imageUrl from the database */}
-                  <img src={getCourseImage(course.imageUrl)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
+                  {/* UPDATED: Directly using image_url from the database */}
+                  <img src={getCourseImage(course.image_url)} alt={course.title} className="course-img" onError={(e) => { e.target.src = PLACEHOLDER; }} />
                   <div className="course-content">
                     <div className="course-meta"><span>{course.level}</span><span>{formatDate(course.dateTime)}</span></div>
                     <h3 className="course-title">{course.title}</h3>
