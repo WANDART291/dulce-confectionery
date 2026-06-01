@@ -29,7 +29,6 @@ INSTALLED_APPS = [
 
     # Local apps
     'business',
-    'anymail',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -109,17 +108,20 @@ USE_TZ = True
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Custom User Model
 AUTH_USER_MODEL = 'business.User'
 
-# --- EMAIL CONFIGURATION (RESEND API) ---
-# Now using standard web traffic (Port 443) to slice through the Render firewall!
-EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+# --- EMAIL CONFIGURATION (GMAIL SMTP) ---
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
-ANYMAIL = {
-    "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
-}
+# Looks for your environment variables first, falls back to raw values for local debugging
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'wandilekhanyile63@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'your-16-character-app-password')
 
-# Resend requires you to send FROM their onboarding address 
-# until you buy a custom domain (like dulcezone.com)
-DEFAULT_FROM_EMAIL = "onboarding@resend.dev"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

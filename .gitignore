@@ -6,5 +6,8 @@ node_modules/
 __pycache__/
 *.pyc
 
-# Database
+# Database (Safety net for default Django DB)
 db.sqlite3
+
+# Local Uploads & Media
+media/
