@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
 // --- THIS IS THE MAGIC BRIDGE TO YOUR LOCAL DOCKER DATABASE ---
 const client = new ApolloClient({
-  uri: 'http://localhost:8000/graphql/', // Switched to local backend
+ uri: 'https://dulce-api-wandile.duckdns.org/graphql/', // Switched to local backend
   cache: new InMemoryCache(),
 });
 

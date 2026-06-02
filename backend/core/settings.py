@@ -9,10 +9,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-key-if-missing')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in ['true', '1']
 
-# Allow all hosts so Docker containers can talk to each other
-ALLOWED_HOSTS = ['*']
+# Explicitly lock down which hostnames this Django instance is allowed to serve
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'dulce-api-wandile.duckdns.org',
+    '144.126.235.206',
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -64,7 +69,7 @@ CORS_ALLOWED_ORIGINS = [
 # PREVENTS GRAPHQL MUTATIONS (LIKE CHECKOUT) FROM BEING BLOCKED
 CSRF_TRUSTED_ORIGINS = [
     "https://dulce-zone.vercel.app",
-    "https://dulce-backend-api.onrender.com",
+    "https://dulce-api-wandile.duckdns.org",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -106,6 +111,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
