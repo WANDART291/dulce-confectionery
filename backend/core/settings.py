@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'graphene_django',
     'corsheaders',
+    'anymail',
 
     # Local apps
     'business',
@@ -120,14 +121,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Custom User Model
 AUTH_USER_MODEL = 'business.User'
 
-# --- EMAIL CONFIGURATION (GMAIL SMTP) ---
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# --- EMAIL CONFIGURATION (SENDGRID ANYMAIL) ---
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 
-# Looks for your environment variables first, falls back to raw values for local debugging
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'wandilekhanyile63@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'your-16-character-app-password')
+ANYMAIL = {
+    # This securely pulls the key from the server's .env file!
+    "SENDGRID_API_KEY": os.environ.get("SENDGRID_API_KEY"),
+}
 
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = "wandilekhanyile63@gmail.com"
