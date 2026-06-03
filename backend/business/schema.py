@@ -114,7 +114,7 @@ class CreateOrder(graphene.Mutation):
             send_mail(
                 customer_subject,
                 plain_message,
-                'onboarding@resend.dev', 
+                'wandilekhanyile63@gmail.com',  # UPDATED TO VERIFIED SENDER
                 [email], 
                 html_message=html_message,
                 fail_silently=False
@@ -124,7 +124,7 @@ class CreateOrder(graphene.Mutation):
             send_mail(
                 owner_subject,
                 owner_message,
-                'onboarding@resend.dev', 
+                'wandilekhanyile63@gmail.com',  # UPDATED TO VERIFIED SENDER
                 ['wandilekhanyile63@gmail.com'], 
                 fail_silently=False
             )
